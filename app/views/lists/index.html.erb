@@ -10,7 +10,13 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody ng-controller="ListController">
+    <tr ng-repeat="list in lists">
+      <td>{{ list }}</td>
+    </tr>
+  </tbody>
+
+  <!-- <tbody>
     <% @lists.each do |list| %>
       <tr>
         <td><%= list.name %></td>
@@ -19,7 +25,7 @@
         <td><%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-  </tbody>
+  </tbody> -->
 </table>
 
 <br>
