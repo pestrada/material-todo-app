@@ -44,6 +44,17 @@ angular.module('Items')
     $http.delete(url, config).then(deleted, error);
   };
 
+  var sendPatch = function (item) {
+    var url = 'http://localhost:3000/lists/' + $scope.listId + '/items/' + item.id + '.json'
+    var config = { headers:  {'Accept': 'application/json;' } };
+
+    var patched = function () {
+      $mdToast.showSimple('item succesfully updated!');
+      loadData();
+    };
+    $http.patch(url, item, config).then(patched, error);
+  };
+
   $scope.newItem = function (ev) {
     var confirm = $mdDialog.prompt()
       .title('New item')
@@ -84,6 +95,36 @@ angular.module('Items')
     $mdDialog.show(confirm).then(function() {
       sendDelete(id);
     }, function () {
+
+    });
+  };
+
+  $scope.editItem = function (ev, item) {
+    var itemId = item.id;
+    var confirm = $mdDialog.prompt()
+      .title('Item')
+      .textContent('Editing item')
+      .placeholder('new name')
+      .ariaLabel('Item name')
+      .initialValue(item.name)
+      .targetEvent(ev)
+      .ok('Save')
+      .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function(result) {
+      if (result) {
+        var item = {
+          id: itemId,
+          list_id: $scope.listId,
+          name: result,
+          completed: false,
+          archived: false
+        };
+        sendPatch(item);
+      } else {
+        $mdToast.showSimple('enter the item data.');
+      }
+    }, function() {
 
     });
   };

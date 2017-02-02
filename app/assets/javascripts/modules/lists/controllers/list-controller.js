@@ -24,18 +24,6 @@ angular.module('Lists')
     $http.post('http://localhost:3000/lists.json', params, config).then(success, error);
   };
 
-  var sendPatch = function (listId, data) {
-    var params = { name: data };
-    var url = 'http://localhost:3000/lists/' + listId + '.json'
-    var config = { headers:  {'Accept': 'application/json;' } };
-
-    var patched = function () {
-      $mdToast.showSimple('list succesfully deleted!');
-      loadData();
-    };
-    $http.patch(url, params, config).then(patched, error);
-  };
-
   var sendDelete = function (listId) {
     var url = 'http://localhost:3000/lists/' + listId + '.json'
     var config = { headers:  {'Accept': 'application/json;' } };
@@ -91,25 +79,6 @@ angular.module('Lists')
 
   $scope.editList = function (ev, listId, listName) {
     location.href = '/lists/' + listId;
-    // var confirm = $mdDialog.prompt()
-    //   .title('List')
-    //   .textContent('Editing list')
-    //   .placeholder('new name')
-    //   .ariaLabel('List name')
-    //   .initialValue(listName)
-    //   .targetEvent(ev)
-    //   .ok('Save')
-    //   .cancel('Cancel');
-
-    // $mdDialog.show(confirm).then(function(result) {
-    //   if (result) {
-    //     sendPatch(listId, result);
-    //   } else {
-    //     $mdToast.showSimple('enter the list name.');
-    //   }
-    // }, function() {
-
-    // });
   };
 
   loadData();
