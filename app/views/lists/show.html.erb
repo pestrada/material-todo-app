@@ -19,26 +19,93 @@
   <div ng-if="itemsEmpty()">
     <p>No items left. Add some items to start...</p>
   </div>
-  <div ng-repeat="item in items | filter:itemName">
-    <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">{{ item.name }}</span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-checkbox ng-model="item.completed" aria-label="Checkbox 1" class="top-offset" ng-click="completeItem(item)">
-          Completed:
-        </md-checkbox>
-        <md-button class="md-icon-button" ng-click="editItem($event, item)">
-          <i class="material-icons">mode_edit</i>
-        </md-button>
-        <md-button class="md-icon-button" ng-click="deleteItem($event, item.id)">
-          <i class="material-icons">delete</i>
-        </md-button>
-      </md-card-actions>
-    </md-card>
-  </div>
+  <md-tabs md-dynamic-height md-border-bottom" md-center-tabs="true">
+    <md-tab label="Uncompleted">
+      <md-content class="md-padding">
+        <h1 class="md-display-2">Uncompleted</h1>
+        <div ng-repeat="item in items | filter:itemName">
+          <div ng-if="!item.completed && !item.archived">
+            <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">{{ item.name }}</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <md-checkbox ng-model="item.completed" aria-label="Checkbox 1" class="top-offset" ng-click="completeItem(item)">
+                  Completed:
+                </md-checkbox>
+                <md-button class="md-icon-button" ng-click="editItem($event, item)">
+                  <i class="material-icons">mode_edit</i>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="deleteItem($event, item.id)">
+                  <i class="material-icons">delete</i>
+                </md-button>
+              </md-card-actions>
+            </md-card>
+          </div>
+        </div>
+      </md-content>
+    </md-tab>
+    <md-tab label="Completed">
+      <md-content class="md-padding">
+        <h1 class="md-display-2">Completed</h1>
+        <div ng-repeat="item in items | filter:itemName">
+          <div ng-if="item.completed && !item.archived">
+            <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">{{ item.name }}</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <md-checkbox ng-model="item.completed" aria-label="Checkbox 1" class="top-offset" ng-click="completeItem(item)">
+                  Completed:
+                </md-checkbox>
+                <md-button class="md-icon-button" ng-click="editItem($event, item)">
+                  <i class="material-icons">mode_edit</i>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="deleteItem($event, item.id)">
+                  <i class="material-icons">delete</i>
+                </md-button>
+              </md-card-actions>
+            </md-card>
+          </div>
+        </div>
+      </md-content>
+    </md-tab>
+    <md-tab label="Archived">
+      <md-content class="md-padding">
+        <h1 class="md-display-2">Archived</h1>
+        <div ng-repeat="item in items | filter:itemName">
+          <div ng-if="item.archived">
+            <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">{{ item.name }}</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <md-checkbox ng-model="item.completed" aria-label="Checkbox 1" class="top-offset" ng-click="completeItem(item)">
+                  Completed:
+                </md-checkbox>
+                <md-button class="md-icon-button" ng-click="editItem($event, item)">
+                  <i class="material-icons">mode_edit</i>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="deleteItem($event, item.id)">
+                  <i class="material-icons">delete</i>
+                </md-button>
+              </md-card-actions>
+            </md-card>
+          </div>
+        </div>
+      </md-content>
+    </md-tab>
+  </md-tabs>
+  
+  <!-- <div ng-repeat="item in items | filter:itemName">
+    
+  </div> -->
 
   <md-button class="md-fab md-warn md-fab-bottom-right" aria-label="FAB" ng-click="newItem($event)">
     <md-icon>
