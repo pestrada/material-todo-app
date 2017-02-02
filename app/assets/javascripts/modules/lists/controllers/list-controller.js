@@ -36,6 +36,17 @@ angular.module('Lists')
     $http.patch(url, params, config).then(patched, error);
   };
 
+  var sendDelete = function (listId) {
+    var url = 'http://localhost:3000/lists/' + listId + '.json'
+    var config = { headers:  {'Accept': 'application/json;' } };
+
+    var deleted = function () {
+      $mdToast.showSimple('list succesfully deleted!');
+      loadData();
+    };
+    $http.delete(url, config).then(deleted, error);
+  };
+
   $scope.listsEmpty = function () {
     return $scope.lists.length == 0;
   };
@@ -62,15 +73,20 @@ angular.module('Lists')
     });
   };
 
-  $scope.deleteList = function (listId) {
-    var url = 'http://localhost:3000/lists/' + listId + '.json'
-    var config = { headers:  {'Accept': 'application/json;' } };
+  $scope.deleteList = function (ev, listId) {
+    var confirm = $mdDialog.confirm()
+      .title('Would you like to delete this list?')
+      .textContent('The list will no longer be available.')
+      .ariaLabel('delete list')
+      .targetEvent(ev)
+      .ok('Yes!')
+      .cancel('Cancel');
 
-    var deleted = function () {
-      $mdToast.showSimple('list succesfully updated!');
-      loadData();
-    };
-    $http.delete(url, config).then(deleted, error);
+    $mdDialog.show(confirm).then(function() {
+      sendDelete(listId);
+    }, function () {
+      
+    });
   };
 
   $scope.editList = function (ev, listId, listName) {
