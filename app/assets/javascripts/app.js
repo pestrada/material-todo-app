@@ -3,5 +3,6 @@ angular.module('Items', []);
 
 angular.module('todoApp', [
   'Lists',
-  'Items'
+  'Items',
+  'ngMaterial'
 ]);
