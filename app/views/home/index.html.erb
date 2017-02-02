@@ -1,20 +1,42 @@
 <div ng-controller="ListController" ng-cloak>
-
   <md-content>
-
-    <br>
-
-    <md-toolbar class="md-hue-2">
+    <md-toolbar class="md-primary md-hue-2">
       <div class="md-toolbar-tools">
-        <h2 flex md-truncate>Toolbar with Disabled/Enabled Icon Buttons</h2>
+        <h2 flex md-truncate>Lists</h2>
       </div>
-    </md-toolbar>
-
-    <md-button class="md-fab md-warn" aria-label="FAB">
-      <md-icon>
-        <i class="material-icons">add</i>
-      </md-icon>
-    </md-button>
-    
+    </md-toolbar>    
   </md-content>
+
+  <div ng-if="listsEmpty()">
+    <p>Hooray!, nothing to do? Try the red pill...</p>
+  </div>
+  <div ng-repeat="list in lists">
+    <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{ list.name }}</span>
+          <span class="md-subhead">
+            <md-progress-linear md-mode="determinate" value="{{progress}}"></md-progress-linear>
+          </span>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div class="md-media-sm card-media">{{progress}}%</div>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-icon-button">
+          <i class="material-icons">mode_edit</i>
+        </md-button>
+        <md-button class="md-icon-button">
+          <i class="material-icons">delete</i>
+        </md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+
+  <md-button class="md-fab md-warn md-fab-bottom-right" aria-label="FAB" ng-click="newList">
+    <md-icon>
+      <i class="material-icons">add</i>
+    </md-icon>
+  </md-button>
 </div>
