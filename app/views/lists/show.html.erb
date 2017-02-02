@@ -5,5 +5,40 @@
   <%= @list.name %>
 </p>
 
+<h2>Items - <%= @list.items.length %> </h2>
+<% @list.items.each do |item| %>
+  <p>
+    <strong>Name:</strong>
+    <%= item.name %>
+  </p>
+  <p>
+    <strong>completed:</strong>
+    <%= item.completed %>
+  </p>
+  <p>
+    <strong>archived:</strong>
+    <%= item.archived %>
+  </p>
+<% end %>
+
+<h2>Add a new item:</h2>
+<%= form_for([@list, @list.items.build]) do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :completed %><br>
+    <%= f.check_box :completed %>
+  </p>
+  <p>
+    <%= f.label :archived %><br>
+    <%= f.check_box :archived %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
 <%= link_to 'Edit', edit_list_path(@list) %> |
 <%= link_to 'Back', lists_path %>

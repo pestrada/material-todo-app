@@ -11,5 +11,9 @@ angular.module('Lists')
   $scope.listsEmpty = function () {
     return $scope.lists.length == 0;
   };
+
+  $scope.newList = function () {
+    
+  };
 }
 ]);
