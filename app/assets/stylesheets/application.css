@@ -16,3 +16,17 @@
 body {
   background-color: #FBE9E7;
 }
+
+.input-search {
+  margin-top: 0px;
+}
+
+.padded {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 1%;
+}
+
+.white {
+  background-color: white;
+}
