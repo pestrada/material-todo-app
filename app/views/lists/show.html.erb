@@ -2,7 +2,7 @@
   <md-content>
     <md-toolbar class="md-primary md-hue-2">
       <div class="md-toolbar-tools">
-        <h2 flex md-truncate>Items</h2>
+        <h2 flex md-truncate>Items in List: {{ listName }}</h2>
       </div>
     </md-toolbar>
   </md-content>
@@ -16,8 +16,8 @@
     </md-input-container>
   </div>
 
-  <div ng-if="listsEmpty()">
-    <p>Hooray!, nothing to do? Try the red pill...</p>
+  <div ng-if="itemsEmpty()">
+    <p>No items left. Add some items to start...</p>
   </div>
   <div ng-repeat="item in items | filter:itemName">
     <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
