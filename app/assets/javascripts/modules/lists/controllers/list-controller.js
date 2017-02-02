@@ -50,6 +50,17 @@ angular.module('Lists')
     });
   };
 
+  $scope.deleteList = function (listId) {
+    var url = 'http://localhost:3000/lists/' + listId + '.json'
+    var config = { headers:  {'Accept': 'application/json;' } };
+
+    var deleted = function () {
+      $mdToast.showSimple('list succesfully deleted!');
+      loadData();
+    };
+    $http.delete(url, config).then(deleted, error);
+  };
+
   loadData();
 }
 ]);
