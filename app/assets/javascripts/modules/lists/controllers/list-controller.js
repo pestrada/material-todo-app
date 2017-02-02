@@ -10,12 +10,19 @@ angular.module('Lists')
     });
   };
 
+  var sendPost = function (data) {
+    var params = { name: data };
+    var config = { headers:  {'Accept': 'application/json;' } };
+    $http.post('http://localhost:3000/lists.json', params, config).then(function(response) {
+      if (response.data) $scope.lists.push(response.data);
+    });
+  };
+
   $scope.listsEmpty = function () {
     return $scope.lists.length == 0;
   };
 
   $scope.newList = function (ev) {
-    // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog.prompt()
       .title('Enter the list name')
       .textContent('What would you like to acomplish?')
@@ -27,7 +34,9 @@ angular.module('Lists')
       .cancel('Cancel');
 
     $mdDialog.show(confirm).then(function(result) {
-      loadData()
+      if (result) {
+        sendPost(result);
+      }
     }, function() {
       
     });
