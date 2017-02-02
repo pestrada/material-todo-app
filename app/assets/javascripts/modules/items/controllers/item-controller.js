@@ -33,6 +33,17 @@ angular.module('Items')
     $http.post(url, item, config).then(success, error);
   };
 
+  var sendDelete = function (id) {
+    var url = 'http://localhost:3000/lists/' + $scope.listId + '/items/' + id + '.json'
+    var config = { headers:  {'Accept': 'application/json;' } };
+
+    var deleted = function () {
+      $mdToast.showSimple('item succesfully deleted!');
+      loadData();
+    };
+    $http.delete(url, config).then(deleted, error);
+  };
+
   $scope.newItem = function (ev) {
     var confirm = $mdDialog.prompt()
       .title('New item')
@@ -57,6 +68,22 @@ angular.module('Items')
         $mdToast.showSimple('enter the item name.');
       }
     }, function() {
+
+    });
+  };
+
+  $scope.deleteItem = function (ev, id) {
+    var confirm = $mdDialog.confirm()
+      .title('Would you like to delete this item?')
+      .textContent('The item will no longer be available.')
+      .ariaLabel('delete item')
+      .targetEvent(ev)
+      .ok('Yes!')
+      .cancel('Cancel');
+
+    $mdDialog.show(confirm).then(function() {
+      sendDelete(id);
+    }, function () {
 
     });
   };
