@@ -1,16 +1,17 @@
 angular.module('Items')
 
-.controller('ItemsController', ['$scope', '$http', function ($scope, $http) {
+.controller('ItemsController', ['$scope', '$http', '$mdDialog', '$mdToast', function ($scope, $http, $mdDialog, $mdToast) {
   $scope.items = [];
   $scope.progress = 0;
+  $scope.listId;
 
   $scope.itemsEmpty = function () {
     return $scope.items.length == 0;
   };
 
   var loadData = function () {
-    var listId = +location.href.split('/').pop();
-    var url = 'http://localhost:3000/lists/' + listId + '.json'
+    $scope.listId = +location.href.split('/').pop();
+    var url = 'http://localhost:3000/lists/' + $scope.listId + '.json'
     var config = { headers:  {'Accept': 'application/json;' } };
 
     $http.get(url).then(function(response) {
@@ -19,17 +20,17 @@ angular.module('Items')
   };
 
   var success = function (response) {
-    if (response.data) $scope.lists.push(response.data);
+    if (response.data) $scope.items.push(response.data);
   };
 
   var error = function (response) {
     $mdToast.showSimple('name ' + response.data.name[0]);
   };
 
-  var sendPost = function (data) {
-    var params = { name: data };
+  var sendPost = function (item) {
     var config = { headers:  {'Accept': 'application/json;' } };
-    $http.post('http://localhost:3000/items.json', params, config).then(success, error);
+    var url = 'http://localhost:3000/lists/' + $scope.listId + '/items.json';
+    $http.post(url, item, config).then(success, error);
   };
 
   $scope.newItem = function (ev) {
@@ -45,7 +46,13 @@ angular.module('Items')
 
     $mdDialog.show(confirm).then(function(result) {
       if (result) {
-        sendPost(result);
+        var item = {
+          list_id: $scope.listId,
+          name: result,
+          completed: false,
+          archived: false
+        };
+        sendPost(item);
       } else {
         $mdToast.showSimple('enter the item name.');
       }
