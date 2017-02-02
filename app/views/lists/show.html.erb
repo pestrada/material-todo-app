@@ -33,7 +33,10 @@
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
                 <md-checkbox ng-model="item.completed" aria-label="Checkbox 1" class="top-offset" ng-click="completeItem(item)">
-                  Completed:
+                  Completed
+                </md-checkbox>
+                <md-checkbox ng-model="item.archived" aria-label="Checkbox 2" class="top-offset" ng-click="archiveItem(item)">
+                  Archived
                 </md-checkbox>
                 <md-button class="md-icon-button" ng-click="editItem($event, item)">
                   <i class="material-icons">mode_edit</i>
@@ -60,7 +63,10 @@
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
                 <md-checkbox ng-model="item.completed" aria-label="Checkbox 1" class="top-offset" ng-click="completeItem(item)">
-                  Completed:
+                  Completed
+                </md-checkbox>
+                <md-checkbox ng-model="item.archived" aria-label="Checkbox 2" class="top-offset" ng-click="archiveItem(item)">
+                  Archived
                 </md-checkbox>
                 <md-button class="md-icon-button" ng-click="editItem($event, item)">
                   <i class="material-icons">mode_edit</i>
@@ -87,7 +93,10 @@
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
                 <md-checkbox ng-model="item.completed" aria-label="Checkbox 1" class="top-offset" ng-click="completeItem(item)">
-                  Completed:
+                  Completed
+                </md-checkbox>
+                <md-checkbox ng-model="item.archived" aria-label="Checkbox 2" class="top-offset" ng-click="archiveItem(item)">
+                  Archived
                 </md-checkbox>
                 <md-button class="md-icon-button" ng-click="editItem($event, item)">
                   <i class="material-icons">mode_edit</i>

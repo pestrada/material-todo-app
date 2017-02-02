@@ -36,7 +36,7 @@ angular.module('Items')
   };
 
   var sendDelete = function (id) {
-    var url = 'http://localhost:3000/lists/' + $scope.listId + '/items/' + id + '.json'
+    var url = 'http://localhost:3000/lists/' + $scope.listId + '/items/' + id + '.json';
     var config = { headers:  {'Accept': 'application/json;' } };
 
     var deleted = function () {
@@ -133,6 +133,11 @@ angular.module('Items')
 
   $scope.completeItem = function (item) {
     item.completed = !item.completed;
+    sendPatch(item);
+  };
+
+  $scope.archiveItem = function (item) {
+    item.archived = !item.archived;
     sendPatch(item);
   };
 

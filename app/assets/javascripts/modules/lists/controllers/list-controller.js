@@ -25,7 +25,7 @@ angular.module('Lists')
   };
 
   var sendDelete = function (listId) {
-    var url = 'http://localhost:3000/lists/' + listId + '.json'
+    var url = 'http://localhost:3000/lists/' + listId + '.json';
     var config = { headers:  {'Accept': 'application/json;' } };
 
     var deleted = function () {
