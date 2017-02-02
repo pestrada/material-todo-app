@@ -27,6 +27,9 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-actions layout="row" layout-align="end center">
+        <md-checkbox ng-model="item.completed" aria-label="Checkbox 1" class="top-offset" ng-click="completeItem(item)">
+          Completed:
+        </md-checkbox>
         <md-button class="md-icon-button" ng-click="editItem($event, item)">
           <i class="material-icons">mode_edit</i>
         </md-button>

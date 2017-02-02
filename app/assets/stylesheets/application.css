@@ -27,6 +27,10 @@ body {
   padding-top: 1%;
 }
 
+.top-offset {
+  margin-top: 20px;
+}
+
 .white {
   background-color: white;
 }

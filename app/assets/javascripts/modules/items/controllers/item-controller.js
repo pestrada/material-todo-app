@@ -131,6 +131,11 @@ angular.module('Items')
     });
   };
 
+  $scope.completeItem = function (item) {
+    item.completed = !item.completed;
+    sendPatch(item);
+  };
+
   loadData();
 
 }]);
