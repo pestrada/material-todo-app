@@ -1,6 +1,6 @@
 angular.module('Lists')
 
-.controller('ListController', ['$scope', '$http', '$mdDialog', function ($scope, $http, $mdDialog) {
+.controller('ListController', ['$scope', '$http', '$mdDialog', '$mdToast', function ($scope, $http, $mdDialog, $mdToast) {
   $scope.lists = [];
   $scope.progress = 0;
 
@@ -10,12 +10,18 @@ angular.module('Lists')
     });
   };
 
+  var success = function (response) {
+    if (response.data) $scope.lists.push(response.data);
+  };
+
+  var error = function (response) {
+    $mdToast.showSimple('name ' + response.data.name[0]);
+  };
+
   var sendPost = function (data) {
     var params = { name: data };
     var config = { headers:  {'Accept': 'application/json;' } };
-    $http.post('http://localhost:3000/lists.json', params, config).then(function(response) {
-      if (response.data) $scope.lists.push(response.data);
-    });
+    $http.post('http://localhost:3000/lists.json', params, config).then(success, error);
   };
 
   $scope.listsEmpty = function () {
@@ -36,9 +42,11 @@ angular.module('Lists')
     $mdDialog.show(confirm).then(function(result) {
       if (result) {
         sendPost(result);
+      } else {
+        $mdToast.showSimple('enter the list name.');
       }
     }, function() {
-      
+
     });
   };
 
