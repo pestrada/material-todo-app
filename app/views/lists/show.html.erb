@@ -1,44 +1,45 @@
-<p id="notice"><%= notice %></p>
+<div ng-controller="ItemsController" ng-cloak>
+  <md-content>
+    <md-toolbar class="md-primary md-hue-2">
+      <div class="md-toolbar-tools">
+        <h2 flex md-truncate>Items</h2>
+      </div>
+    </md-toolbar>
+  </md-content>
 
-<p>
-  <strong>Name:</strong>
-  <%= @list.name %>
-</p>
+  <div class="padded white">
+    <md-input-container md-no-float class="md-block input-search">
+      <md-icon class="md-icon">
+        <i class="material-icons">search</i>
+      </md-icon>
+      <input ng-model="itemName" type="text" placeholder="Search" >
+    </md-input-container>
+  </div>
 
-<h2>Items - <%= @list.items.length %> </h2>
-<% @list.items.each do |item| %>
-  <p>
-    <strong>Name:</strong>
-    <%= item.name %>
-  </p>
-  <p>
-    <strong>completed:</strong>
-    <%= item.completed %>
-  </p>
-  <p>
-    <strong>archived:</strong>
-    <%= item.archived %>
-  </p>
-<% end %>
+  <div ng-if="listsEmpty()">
+    <p>Hooray!, nothing to do? Try the red pill...</p>
+  </div>
+  <div ng-repeat="item in items | filter:itemName">
+    <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{ item.name }}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-icon-button" ng-click="editList($event, list.id, list.name)">
+          <i class="material-icons">mode_edit</i>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="deleteList($event, list.id)">
+          <i class="material-icons">delete</i>
+        </md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
 
-<h2>Add a new item:</h2>
-<%= form_for([@list, @list.items.build]) do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :completed %><br>
-    <%= f.check_box :completed %>
-  </p>
-  <p>
-    <%= f.label :archived %><br>
-    <%= f.check_box :archived %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>
+  <md-button class="md-fab md-warn md-fab-bottom-right" aria-label="FAB" ng-click="newItem($event)">
+    <md-icon>
+      <i class="material-icons">add</i>
+    </md-icon>
+  </md-button>
+</div>

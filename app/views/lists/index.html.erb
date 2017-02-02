@@ -1,27 +1,51 @@
-<p id="notice"><%= notice %></p>
+<div ng-controller="ListController" ng-cloak>
+  <md-content>
+    <md-toolbar class="md-primary md-hue-2">
+      <div class="md-toolbar-tools">
+        <h2 flex md-truncate>Lists</h2>
+      </div>
+    </md-toolbar>
+  </md-content>
 
-<h1>Lists</h1>
+  <div class="padded white">
+    <md-input-container md-no-float class="md-block input-search">
+      <md-icon class="md-icon">
+        <i class="material-icons">search</i>
+      </md-icon>
+      <input ng-model="listName" type="text" placeholder="Search" >
+    </md-input-container>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div ng-if="listsEmpty()">
+    <p>Hooray!, nothing to do? Try the red pill...</p>
+  </div>
+  <div ng-repeat="list in lists | filter:listName">
+    <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{ list.name }}</span>
+          <span class="md-subhead">
+            <md-progress-linear md-mode="determinate" value="{{progress}}"></md-progress-linear>
+          </span>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div class="md-media-sm card-media">{{progress}}%</div>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-icon-button" ng-click="editList($event, list.id, list.name)">
+          <i class="material-icons">mode_edit</i>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="deleteList($event, list.id)">
+          <i class="material-icons">delete</i>
+        </md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
 
-  <tbody>
-    <% @lists.each do |list| %>
-      <tr>
-        <td><%= list.name %></td>
-        <td><%= link_to 'Show', list %></td>
-        <td><%= link_to 'Edit', edit_list_path(list) %></td>
-        <td><%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New List', new_list_path %>
+  <md-button class="md-fab md-warn md-fab-bottom-right" aria-label="FAB" ng-click="newList($event)">
+    <md-icon>
+      <i class="material-icons">add</i>
+    </md-icon>
+  </md-button>
+</div>

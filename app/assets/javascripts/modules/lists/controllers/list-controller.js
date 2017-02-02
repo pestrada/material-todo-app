@@ -85,30 +85,31 @@ angular.module('Lists')
     $mdDialog.show(confirm).then(function() {
       sendDelete(listId);
     }, function () {
-      
+
     });
   };
 
   $scope.editList = function (ev, listId, listName) {
-    var confirm = $mdDialog.prompt()
-      .title('List')
-      .textContent('Editing list')
-      .placeholder('new name')
-      .ariaLabel('List name')
-      .initialValue(listName)
-      .targetEvent(ev)
-      .ok('Save')
-      .cancel('Cancel');
+    location.href = '/lists/' + listId;
+    // var confirm = $mdDialog.prompt()
+    //   .title('List')
+    //   .textContent('Editing list')
+    //   .placeholder('new name')
+    //   .ariaLabel('List name')
+    //   .initialValue(listName)
+    //   .targetEvent(ev)
+    //   .ok('Save')
+    //   .cancel('Cancel');
 
-    $mdDialog.show(confirm).then(function(result) {
-      if (result) {
-        sendPatch(listId, result);
-      } else {
-        $mdToast.showSimple('enter the list name.');
-      }
-    }, function() {
+    // $mdDialog.show(confirm).then(function(result) {
+    //   if (result) {
+    //     sendPatch(listId, result);
+    //   } else {
+    //     $mdToast.showSimple('enter the list name.');
+    //   }
+    // }, function() {
 
-    });
+    // });
   };
 
   loadData();
