@@ -25,11 +25,11 @@
         <md-card-title-text>
           <span class="md-headline">{{ list.name }}</span>
           <span class="md-subhead">
-            <md-progress-linear md-mode="determinate" value="{{progress}}"></md-progress-linear>
+            <md-progress-linear md-mode="determinate" value="{{ list.progress }}"></md-progress-linear>
           </span>
         </md-card-title-text>
         <md-card-title-media>
-          <div class="md-media-sm card-media">{{progress}}%</div>
+          <div class="md-media-sm card-media">{{ list.progress }}%</div>
         </md-card-title-media>
       </md-card-title>
       <md-card-actions layout="row" layout-align="end center">

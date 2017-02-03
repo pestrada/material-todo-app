@@ -2,7 +2,6 @@ angular.module('Items')
 
 .controller('ItemsController', ['$scope', '$http', '$mdDialog', '$mdToast', function ($scope, $http, $mdDialog, $mdToast) {
   $scope.items = [];
-  $scope.progress = 0;
   $scope.listId;
   $scope.listName;
 

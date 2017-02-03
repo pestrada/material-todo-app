@@ -2,7 +2,6 @@ angular.module('Lists')
 
 .controller('ListController', ['$scope', '$http', '$mdDialog', '$mdToast', function ($scope, $http, $mdDialog, $mdToast) {
   $scope.lists = [];
-  $scope.progress = 0;
 
   var loadData = function () {
     $http.get('http://localhost:3000/lists.json').then(function(response) {
