@@ -4,6 +4,7 @@ angular.module('Items')
   $scope.items = [];
   $scope.listId;
   $scope.listName;
+  $scope.progress = 0;
 
   $scope.itemsEmpty = function () {
     return $scope.items.length == 0;
@@ -17,6 +18,7 @@ angular.module('Items')
     $http.get(url).then(function(response) {
       $scope.items = response.data.items;
       $scope.listName = response.data.name;
+      $scope.progress = response.data.progress;
     });
   };
 

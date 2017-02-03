@@ -28,6 +28,8 @@
         <h1 class="md-display-2"></h1>
         <div ng-repeat="item in items | filter:itemName">
           <div ng-if="!item.completed && !item.archived">
+            <div class="md-media-sm card-media right">Progress: {{ progress | number:0 }}%</div>
+            <md-progress-linear md-mode="determinate" value="{{progress}}"></md-progress-linear>
             <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
               <md-card-title>
                 <md-card-title-text>
@@ -55,6 +57,8 @@
         <h1 class="md-display-2"></h1>
         <div ng-repeat="item in items | filter:itemName">
           <div ng-if="item.completed && !item.archived">
+            <div class="md-media-sm card-media right">Progress: {{ progress | number:0 }}%</div>
+            <md-progress-linear md-mode="determinate" value="{{progress}}"></md-progress-linear>
             <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
               <md-card-title>
                 <md-card-title-text>
@@ -85,6 +89,8 @@
         <h1 class="md-display-2"></h1>
         <div ng-repeat="item in items | filter:itemName">
           <div ng-if="item.archived">
+            <div class="md-media-sm card-media right">Progress: {{ progress | number:0 }}%</div>
+            <md-progress-linear md-mode="determinate" value="{{progress}}"></md-progress-linear>
             <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
               <md-card-title>
                 <md-card-title-text>

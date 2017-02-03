@@ -31,6 +31,10 @@ body {
   padding-top: 1%;
 }
 
+.right {
+  text-align: right;
+}
+
 .top-offset {
   margin-top: 20px;
 }
