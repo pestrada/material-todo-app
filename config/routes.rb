@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'list', to: 'home#show'
-  root 'home#index'
+  root 'lists#index'
 end
