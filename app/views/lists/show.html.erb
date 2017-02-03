@@ -88,17 +88,17 @@
             <md-card class="card" md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-headline">{{ item.name }}</span>
+                  <span class="md-headline line">{{ item.name }}</span>
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-checkbox ng-model="item.completed" aria-label="Checkbox 1" class="top-offset" ng-click="completeItem(item)">
+                <md-checkbox ng-model="item.completed" aria-label="Checkbox 1" class="top-offset" ng-click="completeItem(item)" disabled>
                   Completed
                 </md-checkbox>
-                <md-checkbox ng-model="item.archived" aria-label="Checkbox 2" class="top-offset" ng-click="archiveItem(item)">
+                <md-checkbox ng-model="item.archived" aria-label="Checkbox 2" class="top-offset" ng-click="archiveItem(item)" disabled>
                   Archived
                 </md-checkbox>
-                <md-button class="md-icon-button" ng-click="editItem($event, item)">
+                <md-button class="md-icon-button" ng-click="editItem($event, item)" disabled>
                   <i class="material-icons">mode_edit</i>
                 </md-button>
                 <md-button class="md-icon-button" ng-click="deleteItem($event, item.id)">

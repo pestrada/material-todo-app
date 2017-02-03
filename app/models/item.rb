@@ -8,6 +8,7 @@ class Item < ApplicationRecord
     def update_progress
       itemCount = self.list.items.length
       completed = self.list.items.to_a.count { |item| item.completed == true }
+      completed += 1 if self.completed && !self.archived
       if completed > 0
         self.list.progress = (completed / itemCount.to_f * 100).ceil
       else

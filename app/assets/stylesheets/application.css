@@ -21,6 +21,10 @@ body {
   margin-top: 0px;
 }
 
+.line {
+  text-decoration: line-through;
+}
+
 .padded {
   padding-left: 5%;
   padding-right: 5%;
