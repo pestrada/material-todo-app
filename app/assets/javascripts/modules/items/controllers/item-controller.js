@@ -11,7 +11,7 @@ angular.module('Items')
 
   var loadData = function () {
     $scope.listId = +location.href.split('/').pop();
-    var url = 'http://localhost:3000/lists/' + $scope.listId + '.json'
+    var url = '/lists/' + $scope.listId + '.json'
     var config = { headers:  {'Accept': 'application/json;' } };
 
     $http.get(url).then(function(response) {
@@ -30,12 +30,12 @@ angular.module('Items')
 
   var sendPost = function (item) {
     var config = { headers:  {'Accept': 'application/json;' } };
-    var url = 'http://localhost:3000/lists/' + $scope.listId + '/items.json';
+    var url = '/lists/' + $scope.listId + '/items.json';
     $http.post(url, item, config).then(success, error);
   };
 
   var sendDelete = function (id) {
-    var url = 'http://localhost:3000/lists/' + $scope.listId + '/items/' + id + '.json';
+    var url = '/lists/' + $scope.listId + '/items/' + id + '.json';
     var config = { headers:  {'Accept': 'application/json;' } };
 
     var deleted = function () {
@@ -46,7 +46,7 @@ angular.module('Items')
   };
 
   var sendPatch = function (item) {
-    var url = 'http://localhost:3000/lists/' + $scope.listId + '/items/' + item.id + '.json'
+    var url = '/lists/' + $scope.listId + '/items/' + item.id + '.json'
     var config = { headers:  {'Accept': 'application/json;' } };
 
     var patched = function () {
@@ -139,6 +139,10 @@ angular.module('Items')
     item.archived = !item.archived;
     sendPatch(item);
   };
+
+  $scope.return = function () {
+    location.href = '/lists';
+  }
 
   loadData();
 

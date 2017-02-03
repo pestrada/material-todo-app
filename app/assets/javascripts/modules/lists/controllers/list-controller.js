@@ -4,7 +4,7 @@ angular.module('Lists')
   $scope.lists = [];
 
   var loadData = function () {
-    $http.get('http://localhost:3000/lists.json').then(function(response) {
+    $http.get('/lists.json').then(function(response) {
       $scope.lists = response.data;
     });
   };
@@ -20,11 +20,11 @@ angular.module('Lists')
   var sendPost = function (data) {
     var params = { name: data };
     var config = { headers:  {'Accept': 'application/json;' } };
-    $http.post('http://localhost:3000/lists.json', params, config).then(success, error);
+    $http.post('/lists.json', params, config).then(success, error);
   };
 
   var sendDelete = function (listId) {
-    var url = 'http://localhost:3000/lists/' + listId + '.json';
+    var url = '/lists/' + listId + '.json';
     var config = { headers:  {'Accept': 'application/json;' } };
 
     var deleted = function () {

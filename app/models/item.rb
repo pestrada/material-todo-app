@@ -9,7 +9,7 @@ class Item < ApplicationRecord
       itemCount = self.list.items.length
       completed = self.list.items.to_a.count { |item| item.completed == true }
       if completed > 0
-        self.list.progress = (completed / itemCount.to_f * 100).round
+        self.list.progress = (completed / itemCount.to_f * 100).ceil
       else
         self.list.progress = 0.0
       end
