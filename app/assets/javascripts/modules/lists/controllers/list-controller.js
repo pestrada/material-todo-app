@@ -41,7 +41,7 @@ angular.module('Lists')
   $scope.newList = function (ev) {
     var confirm = $mdDialog.prompt()
       .title('Enter the list name')
-      .textContent('What would you like to acomplish?')
+      .textContent('What would you like to accomplish?')
       .placeholder('learn something new')
       .ariaLabel('List name')
       .initialValue('')
